@@ -3,14 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30E4DF182161A55A0096B1CD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E4DF172161A55A0096B1CD /* main.cpp */; };
+		304D5C0D2161A98B00654FCB /* image_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 304D5C0C2161A98B00654FCB /* image_filter.cpp */; };
+		304D5C462161AEF400654FCB /* harris_corner_detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E4DF1F2161A58F0096B1CD /* harris_corner_detector.cpp */; };
+		304D5C502161B9C000654FCB /* kmeans.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 304D5C0E2161A9AB00654FCB /* kmeans.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		304D5C412161AEE300654FCB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		304D5C4B2161B9AE00654FCB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		30E4DF122161A55A0096B1CD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -23,11 +43,48 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		30E4DF142161A55A0096B1CD /* computer_viz_experiments */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = computer_viz_experiments; sourceTree = BUILT_PRODUCTS_DIR; };
-		30E4DF172161A55A0096B1CD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		304D5C0C2161A98B00654FCB /* image_filter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_filter.cpp; sourceTree = "<group>"; };
+		304D5C0E2161A9AB00654FCB /* kmeans.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kmeans.cpp; sourceTree = "<group>"; };
+		304D5C272161AD0600654FCB /* fish.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = fish.bmp; sourceTree = "<group>"; };
+		304D5C292161AD0600654FCB /* 3743214471_1b5bbfda98_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3743214471_1b5bbfda98_o.jpg; sourceTree = "<group>"; };
+		304D5C2A2161AD0600654FCB /* 4386465943_8cf9776378_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4386465943_8cf9776378_o.jpg; sourceTree = "<group>"; };
+		304D5C2B2161AD0600654FCB /* 4386465943_8cf9776378_o_to_3743214471_1b5bbfda98_o.mat */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4386465943_8cf9776378_o_to_3743214471_1b5bbfda98_o.mat; sourceTree = "<group>"; };
+		304D5C2C2161AD0600654FCB /* bird.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = bird.bmp; sourceTree = "<group>"; };
+		304D5C2D2161AD0600654FCB /* submarine.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = submarine.bmp; sourceTree = "<group>"; };
+		304D5C2F2161AD0600654FCB /* 4191453057_c86028ce1f_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4191453057_c86028ce1f_o.jpg; sourceTree = "<group>"; };
+		304D5C302161AD0600654FCB /* 921919841_a30df938f2_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 921919841_a30df938f2_o.jpg; sourceTree = "<group>"; };
+		304D5C312161AD0600654FCB /* 921919841_a30df938f2_o_to_4191453057_c86028ce1f_o.mat */ = {isa = PBXFileReference; lastKnownFileType = file; path = 921919841_a30df938f2_o_to_4191453057_c86028ce1f_o.mat; sourceTree = "<group>"; };
+		304D5C322161AD0700654FCB /* plane.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = plane.bmp; sourceTree = "<group>"; };
+		304D5C332161AD0700654FCB /* bicycle.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = bicycle.bmp; sourceTree = "<group>"; };
+		304D5C342161AD0700654FCB /* dog.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = dog.bmp; sourceTree = "<group>"; };
+		304D5C352161AD0700654FCB /* motorcycle.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = motorcycle.bmp; sourceTree = "<group>"; };
+		304D5C362161AD0700654FCB /* cat.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = cat.bmp; sourceTree = "<group>"; };
+		304D5C372161AD0700654FCB /* marilyn.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = marilyn.bmp; sourceTree = "<group>"; };
+		304D5C392161AD0700654FCB /* 9318872612_a255c874fb_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9318872612_a255c874fb_o.jpg; sourceTree = "<group>"; };
+		304D5C3A2161AD0700654FCB /* 9021235130_7c2acd9554_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9021235130_7c2acd9554_o.jpg; sourceTree = "<group>"; };
+		304D5C3B2161AD0700654FCB /* 9021235130_7c2acd9554_o_to_9318872612_a255c874fb_o.mat */ = {isa = PBXFileReference; lastKnownFileType = file; path = 9021235130_7c2acd9554_o_to_9318872612_a255c874fb_o.mat; sourceTree = "<group>"; };
+		304D5C3C2161AD0700654FCB /* einstein.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = einstein.bmp; sourceTree = "<group>"; };
+		304D5C452161AEE300654FCB /* harris_corner_detector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = harris_corner_detector; sourceTree = BUILT_PRODUCTS_DIR; };
+		304D5C4F2161B9AE00654FCB /* kmeans */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = kmeans; sourceTree = BUILT_PRODUCTS_DIR; };
+		30E4DF142161A55A0096B1CD /* image_filter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = image_filter; sourceTree = BUILT_PRODUCTS_DIR; };
+		30E4DF1F2161A58F0096B1CD /* harris_corner_detector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = harris_corner_detector.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		304D5C402161AEE300654FCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		304D5C4A2161B9AE00654FCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30E4DF112161A55A0096B1CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,36 +95,143 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		304D5C0A2161A96400654FCB /* kmeans */ = {
+			isa = PBXGroup;
+			children = (
+				304D5C0E2161A9AB00654FCB /* kmeans.cpp */,
+			);
+			path = kmeans;
+			sourceTree = "<group>";
+		};
+		304D5C262161ACDD00654FCB /* images */ = {
+			isa = PBXGroup;
+			children = (
+				304D5C332161AD0700654FCB /* bicycle.bmp */,
+				304D5C2C2161AD0600654FCB /* bird.bmp */,
+				304D5C362161AD0700654FCB /* cat.bmp */,
+				304D5C342161AD0700654FCB /* dog.bmp */,
+				304D5C3C2161AD0700654FCB /* einstein.bmp */,
+				304D5C282161AD0600654FCB /* EpiscopalGaudi */,
+				304D5C272161AD0600654FCB /* fish.bmp */,
+				304D5C372161AD0700654FCB /* marilyn.bmp */,
+				304D5C352161AD0700654FCB /* motorcycle.bmp */,
+				304D5C382161AD0700654FCB /* MountRushmore */,
+				304D5C2E2161AD0600654FCB /* NotreDame */,
+				304D5C322161AD0700654FCB /* plane.bmp */,
+				304D5C2D2161AD0600654FCB /* submarine.bmp */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		304D5C282161AD0600654FCB /* EpiscopalGaudi */ = {
+			isa = PBXGroup;
+			children = (
+				304D5C292161AD0600654FCB /* 3743214471_1b5bbfda98_o.jpg */,
+				304D5C2A2161AD0600654FCB /* 4386465943_8cf9776378_o.jpg */,
+				304D5C2B2161AD0600654FCB /* 4386465943_8cf9776378_o_to_3743214471_1b5bbfda98_o.mat */,
+			);
+			path = EpiscopalGaudi;
+			sourceTree = "<group>";
+		};
+		304D5C2E2161AD0600654FCB /* NotreDame */ = {
+			isa = PBXGroup;
+			children = (
+				304D5C2F2161AD0600654FCB /* 4191453057_c86028ce1f_o.jpg */,
+				304D5C302161AD0600654FCB /* 921919841_a30df938f2_o.jpg */,
+				304D5C312161AD0600654FCB /* 921919841_a30df938f2_o_to_4191453057_c86028ce1f_o.mat */,
+			);
+			path = NotreDame;
+			sourceTree = "<group>";
+		};
+		304D5C382161AD0700654FCB /* MountRushmore */ = {
+			isa = PBXGroup;
+			children = (
+				304D5C392161AD0700654FCB /* 9318872612_a255c874fb_o.jpg */,
+				304D5C3A2161AD0700654FCB /* 9021235130_7c2acd9554_o.jpg */,
+				304D5C3B2161AD0700654FCB /* 9021235130_7c2acd9554_o_to_9318872612_a255c874fb_o.mat */,
+			);
+			path = MountRushmore;
+			sourceTree = "<group>";
+		};
 		30E4DF0B2161A55A0096B1CD = {
 			isa = PBXGroup;
 			children = (
-				30E4DF162161A55A0096B1CD /* computer_viz_experiments */,
+				30E4DF1E2161A5640096B1CD /* harris_corner_detector */,
+				304D5C0A2161A96400654FCB /* kmeans */,
+				304D5C262161ACDD00654FCB /* images */,
+				30E4DF162161A55A0096B1CD /* image_filter */,
 				30E4DF152161A55A0096B1CD /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		30E4DF152161A55A0096B1CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30E4DF142161A55A0096B1CD /* computer_viz_experiments */,
+				30E4DF142161A55A0096B1CD /* image_filter */,
+				304D5C452161AEE300654FCB /* harris_corner_detector */,
+				304D5C4F2161B9AE00654FCB /* kmeans */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30E4DF162161A55A0096B1CD /* computer_viz_experiments */ = {
+		30E4DF162161A55A0096B1CD /* image_filter */ = {
 			isa = PBXGroup;
 			children = (
-				30E4DF172161A55A0096B1CD /* main.cpp */,
+				304D5C0C2161A98B00654FCB /* image_filter.cpp */,
 			);
-			path = computer_viz_experiments;
+			path = image_filter;
+			sourceTree = "<group>";
+		};
+		30E4DF1E2161A5640096B1CD /* harris_corner_detector */ = {
+			isa = PBXGroup;
+			children = (
+				30E4DF1F2161A58F0096B1CD /* harris_corner_detector.cpp */,
+			);
+			path = harris_corner_detector;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30E4DF132161A55A0096B1CD /* computer_viz_experiments */ = {
+		304D5C3D2161AEE300654FCB /* harris_corner_detector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30E4DF1B2161A55A0096B1CD /* Build configuration list for PBXNativeTarget "computer_viz_experiments" */;
+			buildConfigurationList = 304D5C422161AEE300654FCB /* Build configuration list for PBXNativeTarget "harris_corner_detector" */;
+			buildPhases = (
+				304D5C3E2161AEE300654FCB /* Sources */,
+				304D5C402161AEE300654FCB /* Frameworks */,
+				304D5C412161AEE300654FCB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = harris_corner_detector;
+			productName = computer_viz_experiments;
+			productReference = 304D5C452161AEE300654FCB /* harris_corner_detector */;
+			productType = "com.apple.product-type.tool";
+		};
+		304D5C472161B9AE00654FCB /* kmeans */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 304D5C4C2161B9AE00654FCB /* Build configuration list for PBXNativeTarget "kmeans" */;
+			buildPhases = (
+				304D5C482161B9AE00654FCB /* Sources */,
+				304D5C4A2161B9AE00654FCB /* Frameworks */,
+				304D5C4B2161B9AE00654FCB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kmeans;
+			productName = computer_viz_experiments;
+			productReference = 304D5C4F2161B9AE00654FCB /* kmeans */;
+			productType = "com.apple.product-type.tool";
+		};
+		30E4DF132161A55A0096B1CD /* image_filter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30E4DF1B2161A55A0096B1CD /* Build configuration list for PBXNativeTarget "image_filter" */;
 			buildPhases = (
 				30E4DF102161A55A0096B1CD /* Sources */,
 				30E4DF112161A55A0096B1CD /* Frameworks */,
@@ -77,9 +241,9 @@
 			);
 			dependencies = (
 			);
-			name = computer_viz_experiments;
+			name = image_filter;
 			productName = computer_viz_experiments;
-			productReference = 30E4DF142161A55A0096B1CD /* computer_viz_experiments */;
+			productReference = 30E4DF142161A55A0096B1CD /* image_filter */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -97,7 +261,7 @@
 				};
 			};
 			buildConfigurationList = 30E4DF0F2161A55A0096B1CD /* Build configuration list for PBXProject "computer_viz_experiments" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -108,23 +272,269 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				30E4DF132161A55A0096B1CD /* computer_viz_experiments */,
+				304D5C3D2161AEE300654FCB /* harris_corner_detector */,
+				30E4DF132161A55A0096B1CD /* image_filter */,
+				304D5C472161B9AE00654FCB /* kmeans */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		304D5C3E2161AEE300654FCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				304D5C462161AEF400654FCB /* harris_corner_detector.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		304D5C482161B9AE00654FCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				304D5C502161B9C000654FCB /* kmeans.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30E4DF102161A55A0096B1CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30E4DF182161A55A0096B1CD /* main.cpp in Sources */,
+				304D5C0D2161A98B00654FCB /* image_filter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		304D5C432161AEE300654FCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				INCLUDED_SOURCE_FILE_NAMES = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				OTHER_LDFLAGS = (
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_aruco",
+					"-lopencv_bgsegm",
+					"-lopencv_bioinspired",
+					"-lopencv_ccalib",
+					"-lopencv_dnn_objdetect",
+					"-lopencv_dpm",
+					"-lopencv_face",
+					"-lopencv_photo",
+					"-lopencv_fuzzy",
+					"-lopencv_hfs",
+					"-lopencv_img_hash",
+					"-lopencv_line_descriptor",
+					"-lopencv_optflow",
+					"-lopencv_reg",
+					"-lopencv_rgbd",
+					"-lopencv_saliency",
+					"-lopencv_stereo",
+					"-lopencv_structured_light",
+					"-lopencv_phase_unwrapping",
+					"-lopencv_surface_matching",
+					"-lopencv_tracking",
+					"-lopencv_datasets",
+					"-lopencv_dnn",
+					"-lopencv_plot",
+					"-lopencv_xfeatures2d",
+					"-lopencv_shape",
+					"-lopencv_video",
+					"-lopencv_ml",
+					"-lopencv_ximgproc",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_flann",
+					"-lopencv_xobjdetect",
+					"-lopencv_imgcodecs",
+					"-lopencv_objdetect",
+					"-lopencv_xphoto",
+					"-lopencv_imgproc",
+					"-lopencv_core",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		304D5C442161AEE300654FCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				INCLUDED_SOURCE_FILE_NAMES = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				OTHER_LDFLAGS = (
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_aruco",
+					"-lopencv_bgsegm",
+					"-lopencv_bioinspired",
+					"-lopencv_ccalib",
+					"-lopencv_dnn_objdetect",
+					"-lopencv_dpm",
+					"-lopencv_face",
+					"-lopencv_photo",
+					"-lopencv_fuzzy",
+					"-lopencv_hfs",
+					"-lopencv_img_hash",
+					"-lopencv_line_descriptor",
+					"-lopencv_optflow",
+					"-lopencv_reg",
+					"-lopencv_rgbd",
+					"-lopencv_saliency",
+					"-lopencv_stereo",
+					"-lopencv_structured_light",
+					"-lopencv_phase_unwrapping",
+					"-lopencv_surface_matching",
+					"-lopencv_tracking",
+					"-lopencv_datasets",
+					"-lopencv_dnn",
+					"-lopencv_plot",
+					"-lopencv_xfeatures2d",
+					"-lopencv_shape",
+					"-lopencv_video",
+					"-lopencv_ml",
+					"-lopencv_ximgproc",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_flann",
+					"-lopencv_xobjdetect",
+					"-lopencv_imgcodecs",
+					"-lopencv_objdetect",
+					"-lopencv_xphoto",
+					"-lopencv_imgproc",
+					"-lopencv_core",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		304D5C4D2161B9AE00654FCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				INCLUDED_SOURCE_FILE_NAMES = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				OTHER_LDFLAGS = (
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_aruco",
+					"-lopencv_bgsegm",
+					"-lopencv_bioinspired",
+					"-lopencv_ccalib",
+					"-lopencv_dnn_objdetect",
+					"-lopencv_dpm",
+					"-lopencv_face",
+					"-lopencv_photo",
+					"-lopencv_fuzzy",
+					"-lopencv_hfs",
+					"-lopencv_img_hash",
+					"-lopencv_line_descriptor",
+					"-lopencv_optflow",
+					"-lopencv_reg",
+					"-lopencv_rgbd",
+					"-lopencv_saliency",
+					"-lopencv_stereo",
+					"-lopencv_structured_light",
+					"-lopencv_phase_unwrapping",
+					"-lopencv_surface_matching",
+					"-lopencv_tracking",
+					"-lopencv_datasets",
+					"-lopencv_dnn",
+					"-lopencv_plot",
+					"-lopencv_xfeatures2d",
+					"-lopencv_shape",
+					"-lopencv_video",
+					"-lopencv_ml",
+					"-lopencv_ximgproc",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_flann",
+					"-lopencv_xobjdetect",
+					"-lopencv_imgcodecs",
+					"-lopencv_objdetect",
+					"-lopencv_xphoto",
+					"-lopencv_imgproc",
+					"-lopencv_core",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		304D5C4E2161B9AE00654FCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				INCLUDED_SOURCE_FILE_NAMES = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				OTHER_LDFLAGS = (
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_aruco",
+					"-lopencv_bgsegm",
+					"-lopencv_bioinspired",
+					"-lopencv_ccalib",
+					"-lopencv_dnn_objdetect",
+					"-lopencv_dpm",
+					"-lopencv_face",
+					"-lopencv_photo",
+					"-lopencv_fuzzy",
+					"-lopencv_hfs",
+					"-lopencv_img_hash",
+					"-lopencv_line_descriptor",
+					"-lopencv_optflow",
+					"-lopencv_reg",
+					"-lopencv_rgbd",
+					"-lopencv_saliency",
+					"-lopencv_stereo",
+					"-lopencv_structured_light",
+					"-lopencv_phase_unwrapping",
+					"-lopencv_surface_matching",
+					"-lopencv_tracking",
+					"-lopencv_datasets",
+					"-lopencv_dnn",
+					"-lopencv_plot",
+					"-lopencv_xfeatures2d",
+					"-lopencv_shape",
+					"-lopencv_video",
+					"-lopencv_ml",
+					"-lopencv_ximgproc",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_flann",
+					"-lopencv_xobjdetect",
+					"-lopencv_imgcodecs",
+					"-lopencv_objdetect",
+					"-lopencv_xphoto",
+					"-lopencv_imgproc",
+					"-lopencv_core",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		30E4DF192161A55A0096B1CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -239,7 +649,56 @@
 		30E4DF1C2161A55A0096B1CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				INCLUDED_SOURCE_FILE_NAMES = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				OTHER_LDFLAGS = (
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_aruco",
+					"-lopencv_bgsegm",
+					"-lopencv_bioinspired",
+					"-lopencv_ccalib",
+					"-lopencv_dnn_objdetect",
+					"-lopencv_dpm",
+					"-lopencv_face",
+					"-lopencv_photo",
+					"-lopencv_fuzzy",
+					"-lopencv_hfs",
+					"-lopencv_img_hash",
+					"-lopencv_line_descriptor",
+					"-lopencv_optflow",
+					"-lopencv_reg",
+					"-lopencv_rgbd",
+					"-lopencv_saliency",
+					"-lopencv_stereo",
+					"-lopencv_structured_light",
+					"-lopencv_phase_unwrapping",
+					"-lopencv_surface_matching",
+					"-lopencv_tracking",
+					"-lopencv_datasets",
+					"-lopencv_dnn",
+					"-lopencv_plot",
+					"-lopencv_xfeatures2d",
+					"-lopencv_shape",
+					"-lopencv_video",
+					"-lopencv_ml",
+					"-lopencv_ximgproc",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_flann",
+					"-lopencv_xobjdetect",
+					"-lopencv_imgcodecs",
+					"-lopencv_objdetect",
+					"-lopencv_xphoto",
+					"-lopencv_imgproc",
+					"-lopencv_core",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,7 +706,56 @@
 		30E4DF1D2161A55A0096B1CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				INCLUDED_SOURCE_FILE_NAMES = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				OTHER_LDFLAGS = (
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_aruco",
+					"-lopencv_bgsegm",
+					"-lopencv_bioinspired",
+					"-lopencv_ccalib",
+					"-lopencv_dnn_objdetect",
+					"-lopencv_dpm",
+					"-lopencv_face",
+					"-lopencv_photo",
+					"-lopencv_fuzzy",
+					"-lopencv_hfs",
+					"-lopencv_img_hash",
+					"-lopencv_line_descriptor",
+					"-lopencv_optflow",
+					"-lopencv_reg",
+					"-lopencv_rgbd",
+					"-lopencv_saliency",
+					"-lopencv_stereo",
+					"-lopencv_structured_light",
+					"-lopencv_phase_unwrapping",
+					"-lopencv_surface_matching",
+					"-lopencv_tracking",
+					"-lopencv_datasets",
+					"-lopencv_dnn",
+					"-lopencv_plot",
+					"-lopencv_xfeatures2d",
+					"-lopencv_shape",
+					"-lopencv_video",
+					"-lopencv_ml",
+					"-lopencv_ximgproc",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_flann",
+					"-lopencv_xobjdetect",
+					"-lopencv_imgcodecs",
+					"-lopencv_objdetect",
+					"-lopencv_xphoto",
+					"-lopencv_imgproc",
+					"-lopencv_core",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -255,6 +763,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		304D5C422161AEE300654FCB /* Build configuration list for PBXNativeTarget "harris_corner_detector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				304D5C432161AEE300654FCB /* Debug */,
+				304D5C442161AEE300654FCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		304D5C4C2161B9AE00654FCB /* Build configuration list for PBXNativeTarget "kmeans" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				304D5C4D2161B9AE00654FCB /* Debug */,
+				304D5C4E2161B9AE00654FCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		30E4DF0F2161A55A0096B1CD /* Build configuration list for PBXProject "computer_viz_experiments" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -264,7 +790,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30E4DF1B2161A55A0096B1CD /* Build configuration list for PBXNativeTarget "computer_viz_experiments" */ = {
+		30E4DF1B2161A55A0096B1CD /* Build configuration list for PBXNativeTarget "image_filter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30E4DF1C2161A55A0096B1CD /* Debug */,
