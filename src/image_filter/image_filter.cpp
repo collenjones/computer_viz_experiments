@@ -6,8 +6,8 @@
 
 /**
  * 1. Pad with zeroes
- * 2. Support grayscale and color images * 3. Support arbitrary shaped
- * odd-dimension filters (e.g. 7x9 but not 4x5)
+ * 2. Support grayscale and color images
+ * 3. Support arbitrary shaped odd-dimension filters (e.g. 7x9 but not 4x5)
  * 4. Return an error message for even filters as their output is undefined
  * 5. Return an identical image with an identity filter
  * 6. Return a filtered image which is the same resolution as the original image
@@ -38,8 +38,7 @@ cv::Mat filter(cv::Mat &original_image, cv::Mat &kernel) {
                         int image_row_index = kernel_row - kernel.rows / 2;
                         int image_col_index = kernel_col - kernel.cols / 2;
                         float kernel_value = kernel.at<float>(kernel_row, kernel_col);
-                        cv::Vec3b original_pixel = original_image.at<cv::Vec3b>(
-                                                                                cv::Point(col + image_col_index, row + image_row_index));
+                        cv::Vec3b original_pixel = original_image.at<cv::Vec3b>(cv::Point(col + image_col_index, row + image_row_index));
                         total += original_pixel * kernel_value;
                     }
                 }

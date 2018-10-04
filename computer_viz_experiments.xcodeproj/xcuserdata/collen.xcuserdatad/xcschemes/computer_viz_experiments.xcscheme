@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/collen/dev/language/c++/computer_viz_experiments/images/bird.bmp"
+            argument = "/Users/collen/dev/language/c++/computer_viz_experiments/images/corner_image.png"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
