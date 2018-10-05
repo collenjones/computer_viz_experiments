@@ -14,7 +14,7 @@ double get_euclidean_distance(int x1, int y1, int x2, int y2) {
   return sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
 }
 
-cv::SparseMat suppress_nonmax(const cv::SparseMat &interest_points, const cv::Size &window_size, int max_per_window=5, uint min_pixel_distance=40) {
+cv::SparseMat suppress_nonmax(const cv::SparseMat &interest_points, const cv::Size &window_size, int max_per_window=5, uint min_pixel_distance=10) {
   cv::SparseMat salient_points(2, interest_points.size(), CV_32F);
   for (int x = 0; x < interest_points.size()[1]; x += window_size.width) {
     for (int y = 0; y < interest_points.size()[0]; y += window_size.height) {
@@ -103,7 +103,7 @@ cv::SparseMat get_interest_points(const cv::Mat &image, uint descriptor_image_wi
     }
   }
 
-  // Step 5. TBD (non-max suppression)
+  // Step 5. Non-max suppression
   return suppress_nonmax(interest_points, cv::Size(48, 48));
 }
 
@@ -113,7 +113,9 @@ cv::Mat highlight_features(const cv::Mat &image, const cv::SparseMat &interest_p
   cv::SparseMatConstIterator_<float> it_end = interest_points.end<float>();
   for(; it != it_end; ++it) {
     const cv::SparseMat::Node *node = it.node();
-    cv::circle(new_image, cv::Point(node->idx[1], node->idx[0]), 3, cv::Scalar(0, 0, 255));
+    // Draw a red circle with a black outline
+    cv::circle(new_image, cv::Point(node->idx[1], node->idx[0]), 2, cv::Scalar(0, 0, 255), -1, cv::LINE_AA);
+    cv::circle(new_image, cv::Point(node->idx[1], node->idx[0]), 3, cv::Scalar(0, 0, 0), 1, cv::LINE_AA);
   }
   return new_image;
 }
@@ -131,9 +133,9 @@ int main(int argc, char **argv) {
   }
   
   cv::SparseMat interest_points = get_interest_points(image, 5);
+  cv::imshow("Corners", highlight_features(image, interest_points));
+  std::cout << "Corners ready..." << std::endl;
   
-  // TODO: Implement non-max suppression
-  cv::imshow("Features", highlight_features(image, interest_points));
   cv::waitKey(0);
   return 0;
 }
