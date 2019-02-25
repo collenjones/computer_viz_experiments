@@ -7,7 +7,12 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-// TODO: Can we do better than hardcoding this value?
+// TODO:
+//   Don't use arbitrary k value
+//   Improve thresholding
+//   Don't show corners in sky (maybe doable via thresholding)
+//   Profile & improve efficiency
+
 const uint FEATURE_THRESHOLD = 10000;
 
 double get_euclidean_distance(int x1, int y1, int x2, int y2) {
@@ -31,7 +36,7 @@ cv::SparseMat suppress_nonmax(const cv::SparseMat &interest_points, const cv::Si
           window_points.push_back(std::make_tuple(point_y, point_x, *it));
         }
       }
-      
+
       // Sort by R (largest first)
       struct {
         bool operator()(std::tuple<int, int, float> a, std::tuple<int, int, float> b) const
@@ -69,16 +74,17 @@ cv::SparseMat get_interest_points(const cv::Mat &image, uint descriptor_image_wi
   cv::SparseMat interest_points(2, (int[]){image.rows, image.cols}, CV_32F);
   cv::Mat image_gray;
   cvtColor(image, image_gray, cv::COLOR_BGR2GRAY);
-  
+  cv::GaussianBlur( image_gray, image_gray, cv::Size(5,5), 0, 0, cv::BORDER_DEFAULT );
+
   cv::Mat grad_x, grad_y, Ix2, Iy2, Ixy;
   // Step 1. Calculate Gaussian image gradients in x and y direction
   cv::Sobel(image_gray, grad_x, CV_16S, 1, 0, 3, 1, 0, cv::BORDER_DEFAULT);
   cv::Sobel(image_gray, grad_y, CV_16S, 0, 1, 3, 1, 0, cv::BORDER_DEFAULT);
   // Step 2. Compute three images (Ix2, Iy2, Ixy) from the outer products of the gradients
   Ix2 = grad_x.mul(grad_x);
-  Iy2 = grad_y.mul(grad_y); 
+  Iy2 = grad_y.mul(grad_y);
   Ixy = grad_x.mul(grad_y);
-  
+
   const int window_offset = descriptor_image_width / 2;
   for (int row = window_offset; row < image_gray.rows - window_offset; row++) {
     for (int col = window_offset; col < image_gray.cols - window_offset; col++) {
@@ -88,7 +94,7 @@ cv::SparseMat get_interest_points(const cv::Mat &image, uint descriptor_image_wi
                               .colRange(col - window_offset, col + window_offset + 1);
       cv::Mat Ixy_window = Ixy.rowRange(row - window_offset, row + window_offset + 1)
                               .colRange(col - window_offset, col + window_offset + 1);
-      
+
       double Sx2 = cv::sum(Ix2_window)[0];
       double Sy2 = cv::sum(Iy2_window)[0];
       double Sxy = cv::sum(Ixy_window)[0];
@@ -125,17 +131,21 @@ int main(int argc, char **argv) {
     std::cout << "Usage: harris_corner_detector <filename>" << std::endl;
     return -1;
   }
-  
-  cv::Mat image = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
+
+  cv::Mat image = cv::imread(argv[1], cv::IMREAD_COLOR);
+  cv::Mat scaled_down_image;
   if (!image.data) {
     std::cout << "Could not open file or find the image: " << argv[1] << std::endl;
     return -1;
   }
+
+  double scale_factor = 0.5;
+  cv::resize(image, scaled_down_image, cv::Size(image.cols * scale_factor, image.rows * scale_factor));
   
-  cv::SparseMat interest_points = get_interest_points(image, 5);
-  cv::imshow("Corners", highlight_features(image, interest_points));
+  cv::SparseMat interest_points = get_interest_points(scaled_down_image, 16);
+  cv::imshow("Corners", highlight_features(scaled_down_image, interest_points));
   std::cout << "Corners ready..." << std::endl;
-  
+
   cv::waitKey(0);
   return 0;
 }

@@ -377,9 +377,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/include/opencv4;
 				INCLUDED_SOURCE_FILE_NAMES = "";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/lib;
 				OTHER_LDFLAGS = (
 					"-lopencv_stitching",
 					"-lopencv_superres",
@@ -434,9 +434,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/include/opencv4;
 				INCLUDED_SOURCE_FILE_NAMES = "";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/lib;
 				OTHER_LDFLAGS = (
 					"-lopencv_stitching",
 					"-lopencv_superres",
@@ -830,9 +830,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/include/opencv4;
 				INCLUDED_SOURCE_FILE_NAMES = "";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/lib;
 				OTHER_LDFLAGS = (
 					"-lopencv_stitching",
 					"-lopencv_superres",
@@ -887,9 +887,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/include;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/include/opencv4;
 				INCLUDED_SOURCE_FILE_NAMES = "";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/3.4.2/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/4.0.1/lib;
 				OTHER_LDFLAGS = (
 					"-lopencv_stitching",
 					"-lopencv_superres",

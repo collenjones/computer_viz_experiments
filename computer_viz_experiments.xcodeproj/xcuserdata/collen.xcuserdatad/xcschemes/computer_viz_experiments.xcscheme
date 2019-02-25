@@ -68,11 +68,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "/Users/collen/dev/language/c++/computer_viz_experiments/images/EpiscopalGaudi/4386465943_8cf9776378_o.jpg"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "/Users/collen/dev/language/c++/computer_viz_experiments/images/NotreDame/921919841_a30df938f2_o.jpg&#10;/Users/collen/dev/language/c++/computer_viz_experiments/images/NotreDame&#10;/Users/collen/dev/language/c++/computer_viz_experiments/images/NotreDame/921919841_a30df938f2_o.jpg"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

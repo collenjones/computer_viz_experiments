@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
         return -1;
     }
     
-    cv::Mat image = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
+  cv::Mat image = cv::imread(argv[1], cv::IMREAD_COLOR);
     if (!image.data) {
         std::cout << "Could not open file or find the image: " << argv[1]
         << std::endl;
