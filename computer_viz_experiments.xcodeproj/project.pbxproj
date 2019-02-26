@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		304D5C0D2161A98B00654FCB /* image_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 304D5C0C2161A98B00654FCB /* image_filter.cpp */; };
-		304D5C462161AEF400654FCB /* harris_corner_detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E4DF1F2161A58F0096B1CD /* harris_corner_detector.cpp */; };
+		304D5C462161AEF400654FCB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E4DF1F2161A58F0096B1CD /* main.cpp */; };
 		304D5C502161B9C000654FCB /* kmeans.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 304D5C0E2161A9AB00654FCB /* kmeans.cpp */; };
 		304D5C7221645E5E00654FCB /* gaussian_noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 304D5C672163DD8800654FCB /* gaussian_noise.cpp */; };
 		3085AA512224F00300B9A3D2 /* harris.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3085AA4F2224F00300B9A3D2 /* harris.cpp */; };
@@ -83,7 +83,7 @@
 		3085AA4F2224F00300B9A3D2 /* harris.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = harris.cpp; sourceTree = "<group>"; };
 		3085AA502224F00300B9A3D2 /* harris.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = harris.hpp; sourceTree = "<group>"; };
 		30E4DF142161A55A0096B1CD /* image_filter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = image_filter; sourceTree = BUILT_PRODUCTS_DIR; };
-		30E4DF1F2161A58F0096B1CD /* harris_corner_detector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = harris_corner_detector.cpp; sourceTree = "<group>"; };
+		30E4DF1F2161A58F0096B1CD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +229,7 @@
 		30E4DF1E2161A5640096B1CD /* harris_corner_detector */ = {
 			isa = PBXGroup;
 			children = (
-				30E4DF1F2161A58F0096B1CD /* harris_corner_detector.cpp */,
+				30E4DF1F2161A58F0096B1CD /* main.cpp */,
 				3085AA4F2224F00300B9A3D2 /* harris.cpp */,
 				3085AA502224F00300B9A3D2 /* harris.hpp */,
 			);
@@ -347,7 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3085AA512224F00300B9A3D2 /* harris.cpp in Sources */,
-				304D5C462161AEF400654FCB /* harris_corner_detector.cpp in Sources */,
+				304D5C462161AEF400654FCB /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
