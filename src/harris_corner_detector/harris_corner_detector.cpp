@@ -74,7 +74,7 @@ cv::SparseMat get_interest_points(const cv::Mat &image, uint descriptor_image_wi
   cv::SparseMat interest_points(2, (int[]){image.rows, image.cols}, CV_32F);
   cv::Mat image_gray;
   cvtColor(image, image_gray, cv::COLOR_BGR2GRAY);
-  cv::GaussianBlur( image_gray, image_gray, cv::Size(5,5), 0, 0, cv::BORDER_DEFAULT );
+  cv::GaussianBlur(image_gray, image_gray, cv::Size(5,5), 0, 0, cv::BORDER_DEFAULT);
 
   cv::Mat grad_x, grad_y, Ix2, Iy2, Ixy;
   // Step 1. Calculate Gaussian image gradients in x and y direction
@@ -108,8 +108,9 @@ cv::SparseMat get_interest_points(const cv::Mat &image, uint descriptor_image_wi
       }
     }
   }
-
+  
   // Step 5. Non-max suppression
+  std::cout << "Starting NM supression..." << std::endl;
   return suppress_nonmax(interest_points, cv::Size(48, 48));
 }
 
@@ -142,9 +143,12 @@ int main(int argc, char **argv) {
   double scale_factor = 0.5;
   cv::resize(image, scaled_down_image, cv::Size(image.cols * scale_factor, image.rows * scale_factor));
   
+  std::cout << "Getting interest points..." << std::endl;
+  
   cv::SparseMat interest_points = get_interest_points(scaled_down_image, 16);
-  cv::imshow("Corners", highlight_features(scaled_down_image, interest_points));
-  std::cout << "Corners ready..." << std::endl;
+  std::cout << "Drawing interest points..." << std::endl;
+  cv::imshow("Interest Points", highlight_features(scaled_down_image, interest_points));
+  std::cout << "Interest points ready..." << std::endl;
 
   cv::waitKey(0);
   return 0;
