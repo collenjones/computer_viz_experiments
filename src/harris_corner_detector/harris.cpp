@@ -14,7 +14,6 @@ struct Derivatives {
 Derivatives get_derivatives(const cv::Mat &image) {
   cv::Mat image_gray;
   cvtColor(image, image_gray, cv::COLOR_BGR2GRAY);
-  cv::GaussianBlur(image_gray, image_gray, cv::Size(5,5), 0, 0, cv::BORDER_DEFAULT);
   
   cv::Mat Ix, Iy, Ixy;
   cv::Sobel(image_gray, Ix, CV_32F, 1, 0, 3, 1, 0, cv::BORDER_DEFAULT);
