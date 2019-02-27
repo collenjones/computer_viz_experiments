@@ -1,11 +1,3 @@
-//
-//  harris.hpp
-//  harris_corner_detector
-//
-//  Created by Collen Jones on 2/25/19.
-//  Copyright © 2019 Collen Jones. All rights reserved.
-//
-
 #ifndef harris_hpp
 #define harris_hpp
 
