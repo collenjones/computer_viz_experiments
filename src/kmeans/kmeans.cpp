@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+
 #include <opencv2/opencv.hpp>
 
 typedef struct t_color_node {

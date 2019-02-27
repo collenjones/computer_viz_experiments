@@ -1,7 +1,9 @@
+#include "harris.hpp"
+
 #include <algorithm>
 #include <iostream>
+
 #include <opencv2/imgproc/imgproc.hpp>
-#include "harris.hpp"
 
 const int CORNER_DETECTION_THRESHOLD = 10000;
 
