@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "harris.hpp"
@@ -38,32 +39,64 @@ cv::Mat harris::get_interest_points(const cv::Mat &image, float k) {
   
   for (int row = 0; row < derivatives.Iy.rows; ++row) {
     for (int col = 0; col < derivatives.Iy.cols; ++col) {
-      float Ix = derivatives.Ix.at<float>(row, col);
-      float Iy = derivatives.Iy.at<float>(row, col);
-      float Ixy = Ix * Iy;
-      // TODO: Remove this Mat -- will be faster to calculate determinant and trace directly
-      cv::Mat H = (cv::Mat_<double>(2, 2) << Ix * Ix, Ixy,
-                                             Ixy    , Iy * Iy);
-      double trace = cv::trace(H)[0];
-      double R = abs(cv::determinant(H) - (k * trace * trace));
+      // These floats represent the 2x2 H matrix
+      //   Ix^2  Ixy
+      //   Ixy   Iy^2
+      float a11, a12,
+            a21, a22;
+      
+      a11 = derivatives.Ix.at<float>(row, col) * derivatives.Ix.at<float>(row, col);
+      a12 = derivatives.Ix.at<float>(row, col) * derivatives.Iy.at<float>(row, col);
+      a21 = a12;
+      a22 = derivatives.Iy.at<float>(row, col) * derivatives.Iy.at<float>(row, col);
+      
+      float det = a11 * a22 - a12 * a21;
+      float trace = a11 + a22;
+      
+      double R = abs(det - (k * trace * trace));
       interest_points.at<float>(row, col) = R;
     }
   }
   return interest_points;
 }
 
-std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &interest_points) {
+std::vector<harris::InterestPoint> get_top_tile_interest_points(const cv::Mat &tile_window, unsigned int top_left_x, unsigned int top_left_y, unsigned int num_per_tile) {
+  std::vector<harris::InterestPoint> window_interest_points;
+  for (int i = 0; i < tile_window.cols; ++i) {
+    for (int j = 0; j < tile_window.rows; ++j) {
+      harris::InterestPoint interest_point;
+      interest_point.corner_value = tile_window.at<float>(j, i);
+      if (interest_point.corner_value < 10000) {
+        continue;
+      }
+      interest_point.point = cv::Point(top_left_x + i, top_left_y + j);
+      window_interest_points.emplace_back(interest_point);
+    }
+  }
+  if (window_interest_points.size() > 0) {
+    std::sort(window_interest_points.begin(), window_interest_points.end(), [](harris::InterestPoint i1, harris::InterestPoint i2) { return i1.corner_value > i2.corner_value; });
+  }
+  return window_interest_points;
+}
+
+std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &interest_points, unsigned int num_per_tile) {
   std::vector<harris::InterestPoint> interest_point_maximas;
   
-  for (int row = 0; row < interest_points.rows; ++row) {
-    for (int col = 0; col < interest_points.cols; ++col) {
-      float corner_value = interest_points.at<float>(row, col);
-      if (corner_value > 10000) {
-        cv::Point point(col, row);
-        harris::InterestPoint interest_point;
-        interest_point.point = point;
-        interest_point.corner_value = corner_value;
-        interest_point_maximas.emplace_back(interest_point);
+  int window_width = interest_points.cols / 10;
+  int window_height = interest_points.rows / 10;
+  
+  for (int height = 0; height < interest_points.rows; height += window_height) {
+    if (interest_points.rows - height < window_height) {
+      break;
+    }
+    for (int width = 0; width < interest_points.cols; width += window_width) {
+      if (interest_points.cols - width < window_width) {
+        break;
+      }
+      cv::Mat window = interest_points(cv::Range(height, height + window_height), cv::Range(width, width + window_width));
+      std::vector<harris::InterestPoint> window_interest_points = get_top_tile_interest_points(window, width, height, num_per_tile);
+      if (window_interest_points.size() > 0) {
+        std::copy(window_interest_points.begin(), window_interest_points.begin() + num_per_tile, std::back_inserter(interest_point_maximas));
       }
     }
   }
