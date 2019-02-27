@@ -6,8 +6,8 @@
 const int CORNER_DETECTION_THRESHOLD = 10000;
 
 struct Derivatives {
-  cv::Mat Ix;
-  cv::Mat Iy;
+  cv::Mat Ix2;
+  cv::Mat Iy2;
   cv::Mat Ixy;
 };
 
@@ -27,35 +27,40 @@ Derivatives get_derivatives(const cv::Mat &image) {
   cv::GaussianBlur(Ixy, Ixy, derivative_blur_kernel, 0, 0, cv::BORDER_DEFAULT);
   
   Derivatives d;
-  d.Ix = Ix;
-  d.Iy = Iy;
-  d.Ixy = Iy;
+  d.Ix2 = Ix.mul(Ix);
+  d.Iy2 = Iy.mul(Iy);
+  d.Ixy = Ixy;
   
   return d;
 }
 
-cv::Mat harris::get_interest_points(const cv::Mat &image, float k) {
-  Derivatives derivatives = get_derivatives(image);
-  cv::Mat interest_points(derivatives.Ix.rows, derivatives.Ix.cols, CV_32F);
+double compute_corner_value(const cv::Mat &image, const cv::Rect &rect, const Derivatives &d, float k) {
+  cv::Mat sliding_window, sIx2, sIy2, sIxy;
+  sliding_window = image(rect);
+  sIx2 = d.Ix2(rect);
+  sIy2 = d.Iy2(rect);
+  sIxy = d.Ixy(rect);
+  double a11, a12,
+         a21, a22;
+  a11 = cv::sum(sIx2)[0];
+  a12 = cv::sum(sIxy)[0];
+  a21 = a12;
+  a22 = cv::sum(sIy2)[0];
   
-  for (int row = 0; row < derivatives.Iy.rows; ++row) {
-    for (int col = 0; col < derivatives.Iy.cols; ++col) {
-      // These floats represent the 2x2 H matrix
-      //   Ix^2  Ixy
-      //   Ixy   Iy^2
-      float a11, a12,
-            a21, a22;
-      
-      a11 = derivatives.Ix.at<float>(row, col) * derivatives.Ix.at<float>(row, col);
-      a12 = derivatives.Ix.at<float>(row, col) * derivatives.Iy.at<float>(row, col);
-      a21 = a12;
-      a22 = derivatives.Iy.at<float>(row, col) * derivatives.Iy.at<float>(row, col);
-      
-      float det = a11 * a22 - a12 * a21;
-      float trace = a11 + a22;
-      
-      double R = abs(det - (k * trace * trace));
-      interest_points.at<float>(row, col) = R;
+  double determinant = a11 * a22 - a12 * a21;
+  double trace = a11 + a22;
+  
+  return determinant - (k * trace * trace);
+}
+
+cv::Mat harris::get_interest_points(const cv::Mat &image, unsigned int kernel_size, float k) {
+  Derivatives derivatives = get_derivatives(image);
+  cv::Mat interest_points(derivatives.Ix2.rows, derivatives.Ix2.cols, CV_32F);
+  
+  for (int row = 0; row < derivatives.Iy2.rows - kernel_size; ++row) {
+    for (int col = 0; col < derivatives.Iy2.cols - kernel_size; ++col) {
+      double corner_value = compute_corner_value(image, cv::Rect(col, row, kernel_size, kernel_size), derivatives, k);
+      interest_points.at<float>(row + (kernel_size / 2), col + (kernel_size / 2)) = corner_value;
     }
   }
   return interest_points;

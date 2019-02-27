@@ -43,8 +43,8 @@ int main(int argc, char **argv) {
   cv::resize(image, scaled_down_image, cv::Size(image.cols * scale_factor, image.rows * scale_factor));
   
   std::cout << "Getting interest points..." << std::endl;
-  cv::Mat interest_points = harris::get_interest_points(scaled_down_image, k);
-  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points, 10, 10);
+  cv::Mat interest_points = harris::get_interest_points(scaled_down_image, 7, k);
+  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points, 20, 10);
   
   std::cout << "Drawing interest points..." << std::endl;
   cv::imshow("Interest Points", highlight_features(scaled_down_image, interest_point_maximas));
