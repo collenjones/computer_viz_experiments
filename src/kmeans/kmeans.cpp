@@ -1,6 +1,6 @@
 #include <iostream>
-#include <opencv2/opencv.hpp>
 #include <queue>
+#include <opencv2/opencv.hpp>
 
 typedef struct t_color_node {
     cv::Mat mean;
