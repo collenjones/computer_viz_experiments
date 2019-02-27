@@ -19,7 +19,7 @@ namespace harris {
   };
   
   cv::Mat get_interest_points(const cv::Mat &image, float k);
-  std::vector<harris::InterestPoint> suppress_nonmax(const cv::Mat &interest_points, unsigned int num_per_tile);
+  std::vector<harris::InterestPoint> suppress_nonmax(const cv::Mat &interest_points, unsigned int num_per_tile, unsigned int min_pixel_radius);
 };
 
 #endif /* harris_hpp */

@@ -11,8 +11,10 @@
 // TODO:
 //   Don't use arbitrary k value
 //   Improve thresholding
-//   Don't show corners in sky (maybe doable via thresholding)
 //   Profile & improve efficiency
+
+//Global variables
+int slider_num_per_tile = 5;
 
 const float k = 0.04;
 
@@ -39,17 +41,18 @@ int main(int argc, char **argv) {
     return -1;
   }
 
+  // Reduce image size to reduce number of calculations required
   double scale_factor = 0.5;
   cv::resize(image, scaled_down_image, cv::Size(image.cols * scale_factor, image.rows * scale_factor));
   
   std::cout << "Getting interest points..." << std::endl;
   cv::Mat interest_points = harris::get_interest_points(scaled_down_image, k);
-  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points, 10);
+  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points, 10, 10);
   
   std::cout << "Drawing interest points..." << std::endl;
   cv::imshow("Interest Points", highlight_features(scaled_down_image, interest_point_maximas));
+  
   std::cout << "Interest points ready..." << std::endl;
-
   cv::waitKey(0);
   return 0;
 }

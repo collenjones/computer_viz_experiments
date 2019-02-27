@@ -62,25 +62,28 @@ cv::Mat harris::get_interest_points(const cv::Mat &image, float k) {
 
 std::vector<harris::InterestPoint> get_top_tile_interest_points(const cv::Mat &tile_window, unsigned int top_left_x, unsigned int top_left_y, unsigned int num_per_tile) {
   std::vector<harris::InterestPoint> window_interest_points;
-  for (int i = 0; i < tile_window.cols; ++i) {
-    for (int j = 0; j < tile_window.rows; ++j) {
+  for (int c = 0; c < tile_window.cols; ++c) {
+    for (int r = 0; r < tile_window.rows; ++r) {
       harris::InterestPoint interest_point;
-      interest_point.corner_value = tile_window.at<float>(j, i);
+      interest_point.corner_value = tile_window.at<float>(r, c);
       if (interest_point.corner_value < 10000) {
         continue;
       }
-      interest_point.point = cv::Point(top_left_x + i, top_left_y + j);
+      interest_point.point = cv::Point(static_cast<int>(top_left_x) + c, static_cast<int>(top_left_y) + r);
       window_interest_points.emplace_back(interest_point);
     }
   }
-  if (window_interest_points.size() > 0) {
-    std::sort(window_interest_points.begin(), window_interest_points.end(), [](harris::InterestPoint i1, harris::InterestPoint i2) { return i1.corner_value > i2.corner_value; });
+  if (window_interest_points.size() == 0) {
+    return window_interest_points;
   }
-  return window_interest_points;
+  std::sort(window_interest_points.begin(), window_interest_points.end(), [](harris::InterestPoint i1, harris::InterestPoint i2) { return i1.corner_value > i2.corner_value; });
+  std::vector<harris::InterestPoint> trimmed_points(window_interest_points.begin(), std::min(window_interest_points.begin() + num_per_tile, window_interest_points.end()));
+  return trimmed_points;
 }
 
-std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &interest_points, unsigned int num_per_tile) {
+std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &interest_points, unsigned int num_per_tile, unsigned min_pixel_radius) {
   std::vector<harris::InterestPoint> interest_point_maximas;
+  cv::Mat suppression_matrix(interest_points.rows, interest_points.cols, CV_32F, cv::Scalar::all(0));
   
   int window_width = interest_points.cols / 10;
   int window_height = interest_points.rows / 10;
@@ -95,11 +98,34 @@ std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &intere
       }
       cv::Mat window = interest_points(cv::Range(height, height + window_height), cv::Range(width, width + window_width));
       std::vector<harris::InterestPoint> window_interest_points = get_top_tile_interest_points(window, width, height, num_per_tile);
-      if (window_interest_points.size() > 0) {
-        std::copy(window_interest_points.begin(), window_interest_points.begin() + num_per_tile, std::back_inserter(interest_point_maximas));
+
+      // Enforce minimum pixel radius between interest points
+      for (int i = 0; i < window_interest_points.size(); ++i) {
+        harris:InterestPoint ip = window_interest_points[i];
+        if (suppression_matrix.at<int>(ip.point) == 0) {
+          for (int r = -min_pixel_radius; r <= (int) min_pixel_radius; ++r) {
+            for (int c = -min_pixel_radius; c <= (int) min_pixel_radius; ++c) {
+              int sr = ip.point.y + r;
+              int sc = ip.point.x + c;
+              
+              // bounds checking
+              if (sr >= suppression_matrix.rows)
+                sr = suppression_matrix.rows - 1;
+              if (sr < 0)
+                sr = 0;
+              if (sc >= suppression_matrix.cols)
+                sc = suppression_matrix.cols - 1;
+              if (sc < 0)
+                sc = 0;
+              
+              suppression_matrix.at<int>(sr, sc) = 1;
+            }
+          }
+          interest_point_maximas.emplace_back(ip);
+        }
       }
     }
   }
-  
+
   return interest_point_maximas;
 }
