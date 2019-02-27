@@ -3,6 +3,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "harris.hpp"
 
+const int CORNER_DETECTION_THRESHOLD = 10000;
+
 struct Derivatives {
   cv::Mat Ix;
   cv::Mat Iy;
@@ -66,7 +68,7 @@ std::vector<harris::InterestPoint> get_top_tile_interest_points(const cv::Mat &t
     for (int r = 0; r < tile_window.rows; ++r) {
       harris::InterestPoint interest_point;
       interest_point.corner_value = tile_window.at<float>(r, c);
-      if (interest_point.corner_value < 10000) {
+      if (interest_point.corner_value < CORNER_DETECTION_THRESHOLD) {
         continue;
       }
       interest_point.point = cv::Point(static_cast<int>(top_left_x) + c, static_cast<int>(top_left_y) + r);
