@@ -44,11 +44,11 @@ int main(int argc, char **argv) {
   
   std::cout << "Getting interest points..." << std::endl;
   cv::Mat interest_points = harris::get_interest_points(scaled_down_image, k);
-//  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points);
-//
-//  std::cout << "Drawing interest points..." << std::endl;
-//  cv::imshow("Interest Points", highlight_features(scaled_down_image, interest_point_maximas));
-//  std::cout << "Interest points ready..." << std::endl;
+  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points);
+  
+  std::cout << "Drawing interest points..." << std::endl;
+  cv::imshow("Interest Points", highlight_features(scaled_down_image, interest_point_maximas));
+  std::cout << "Interest points ready..." << std::endl;
 
   cv::waitKey(0);
   return 0;
