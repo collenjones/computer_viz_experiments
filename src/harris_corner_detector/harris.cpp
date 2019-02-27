@@ -103,8 +103,8 @@ std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &intere
       for (int i = 0; i < window_interest_points.size(); ++i) {
         harris:InterestPoint ip = window_interest_points[i];
         if (suppression_matrix.at<int>(ip.point) == 0) {
-          for (int r = -min_pixel_radius; r <= (int) min_pixel_radius; ++r) {
-            for (int c = -min_pixel_radius; c <= (int) min_pixel_radius; ++c) {
+          for (int r = -min_pixel_radius; r <= static_cast<int>(min_pixel_radius); ++r) {
+            for (int c = -min_pixel_radius; c <= static_cast<int>(min_pixel_radius); ++c) {
               int sr = ip.point.y + r;
               int sc = ip.point.x + c;
               
