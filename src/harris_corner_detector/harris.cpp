@@ -36,9 +36,8 @@ Derivatives get_derivatives(const cv::Mat &image) {
   return d;
 }
 
-double compute_corner_value(const cv::Mat &image, const cv::Rect &rect, const Derivatives &d, float k) {
-  cv::Mat sliding_window, sIx2, sIy2, sIxy;
-  sliding_window = image(rect);
+double compute_corner_value(const cv::Rect &rect, const Derivatives &d, float k) {
+  cv::Mat sIx2, sIy2, sIxy;
   sIx2 = d.Ix2(rect);
   sIy2 = d.Iy2(rect);
   sIxy = d.Ixy(rect);
@@ -61,7 +60,7 @@ cv::Mat harris::get_interest_points(const cv::Mat &image, unsigned int kernel_si
   
   for (int row = 0; row < derivatives.Iy2.rows - kernel_size; ++row) {
     for (int col = 0; col < derivatives.Iy2.cols - kernel_size; ++col) {
-      double corner_value = compute_corner_value(image, cv::Rect(col, row, kernel_size, kernel_size), derivatives, k);
+      double corner_value = compute_corner_value(cv::Rect(col, row, kernel_size, kernel_size), derivatives, k);
       interest_points.at<float>(row + (kernel_size / 2), col + (kernel_size / 2)) = corner_value;
     }
   }
