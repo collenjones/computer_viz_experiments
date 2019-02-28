@@ -5,7 +5,7 @@
 
 #include <opencv2/imgproc/imgproc.hpp>
 
-const int CORNER_DETECTION_THRESHOLD = 10000;
+const int CORNER_DETECTION_THRESHOLD = 2000000;
 
 struct Derivatives {
   cv::Mat Ix2;
@@ -16,6 +16,8 @@ struct Derivatives {
 Derivatives get_derivatives(const cv::Mat &image) {
   cv::Mat image_gray;
   cvtColor(image, image_gray, cv::COLOR_BGR2GRAY);
+  
+  std::cout << "grayed value: " << (int) image_gray.at<int>(100, 100) << std::endl;
   
   cv::Mat Ix, Iy, Ixy;
   cv::Sobel(image_gray, Ix, CV_32F, 1, 0, 3, 1, 0, cv::BORDER_DEFAULT);
@@ -114,7 +116,7 @@ std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &intere
             for (int c = -min_pixel_radius; c <= static_cast<int>(min_pixel_radius); ++c) {
               int sr = ip.point.y + r;
               int sc = ip.point.x + c;
-              
+
               // bounds checking
               if (sr >= suppression_matrix.rows)
                 sr = suppression_matrix.rows - 1;
@@ -124,7 +126,7 @@ std::vector<harris::InterestPoint> harris::suppress_nonmax(const cv::Mat &intere
                 sc = suppression_matrix.cols - 1;
               if (sc < 0)
                 sc = 0;
-              
+
               suppression_matrix.at<int>(sr, sc) = 1;
             }
           }

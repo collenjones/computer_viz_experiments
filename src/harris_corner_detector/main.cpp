@@ -13,9 +13,9 @@
 //   Profile & improve efficiency
 
 //Global variables
-int slider_num_per_tile = 5;
-
+std::vector<harris::InterestPoint> interest_point_maximas;
 const float k = 0.04;
+const unsigned int min_pixel_radius = 10;
 
 cv::Mat highlight_features(const cv::Mat &image, const std::vector<harris::InterestPoint> &interest_point_maximas) {
   cv::Mat new_image(image);
@@ -25,6 +25,16 @@ cv::Mat highlight_features(const cv::Mat &image, const std::vector<harris::Inter
     cv::circle(new_image, interest_point.point, 3, cv::Scalar(0, 0, 0), 1, cv::LINE_AA);
   }
   return new_image;
+}
+
+void CallBackFunc(int event, int x, int y, int flags, void* userdata) {
+  if ( event == cv::EVENT_MOUSEMOVE ) {
+    for (auto interest_point : interest_point_maximas) {
+      if ((abs(x - interest_point.point.x) < min_pixel_radius) && (abs(y - interest_point.point.y) < min_pixel_radius)) {
+        std::cout << "Interest Point corner value: " << interest_point.corner_value << std::endl;
+      }
+    }
+  }
 }
 
 int main(int argc, char **argv) {
@@ -46,10 +56,14 @@ int main(int argc, char **argv) {
   
   std::cout << "Getting interest points..." << std::endl;
   cv::Mat interest_points = harris::get_interest_points(scaled_down_image, 7, k);
-  std::vector<harris::InterestPoint> interest_point_maximas = harris::suppress_nonmax(interest_points, 20, 10);
+  interest_point_maximas = harris::suppress_nonmax(interest_points, 10, min_pixel_radius);
   
   std::cout << "Drawing interest points..." << std::endl;
-  cv::imshow("Interest Points", highlight_features(scaled_down_image, interest_point_maximas));
+  std::string window_name("Interest Points");
+  cv::namedWindow(window_name, 1);
+  // set the callback function for any mouse event
+  cv::setMouseCallback(window_name, CallBackFunc, NULL);
+  cv::imshow(window_name, highlight_features(scaled_down_image, interest_point_maximas));
   
   std::cout << "Interest points ready..." << std::endl;
   cv::waitKey(0);
